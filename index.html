@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Black Friday Deal Agent — Live Electronics Deals</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg-elev: #12121a;
+    --bg-card: #1a1a24;
+    --border: #272733;
+    --border-hot: #ff3860;
+    --text: #e8e8f0;
+    --text-dim: #8a8a99;
+    --accent: #ff3860;
+    --accent-2: #ffb020;
+    --accent-3: #4ade80;
+    --gradient: linear-gradient(135deg, #ff3860 0%, #ff8040 50%, #ffb020 100%);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(255, 56, 96, 0.15), transparent),
+      radial-gradient(ellipse 60% 50% at 80% 100%, rgba(255, 176, 32, 0.08), transparent);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 32px 24px 80px; position: relative; z-index: 1; }
+
+  /* Header */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .brand { display: flex; align-items: center; gap: 14px; }
+  .brand-icon {
+    width: 48px; height: 48px;
+    background: var(--gradient);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 8px 32px rgba(255, 56, 96, 0.3);
+  }
+  .brand-text h1 {
+    font-size: 22px; font-weight: 800; letter-spacing: -0.02em;
+    background: var(--gradient);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .brand-text p { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+  .live-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 14px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 13px; font-weight: 500;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .pulse {
+    width: 8px; height: 8px;
+    background: var(--accent-3);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); }
+    50% { opacity: 0.6; box-shadow: 0 0 0 8px rgba(74, 222, 128, 0); }
+  }
+
+  /* Hero section */
+  .hero {
+    background: linear-gradient(135deg, rgba(255, 56, 96, 0.08), rgba(255, 176, 32, 0.04));
+    border: 1px solid rgba(255, 56, 96, 0.2);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 48px;
+    text-align: center;
+  }
+  .hero-eyebrow {
+    display: inline-block;
+    padding: 6px 12px;
+    background: rgba(255, 56, 96, 0.15);
+    border: 1px solid rgba(255, 56, 96, 0.3);
+    border-radius: 100px;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .hero h2 {
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+    line-height: 1.1;
+  }
+  .hero p {
+    font-size: 17px;
+    color: var(--text-dim);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 24px;
+    max-width: 700px;
+    margin: 32px auto 0;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+  .stat-num {
+    font-size: 28px; font-weight: 800;
+    background: var(--gradient);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+  }
+
+  /* Section */
+  .section { margin-bottom: 48px; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-head h3 {
+    font-size: 20px; font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .section-head span { font-size: 13px; color: var(--text-dim); }
+
+  /* Deal grid */
+  .deal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .deal {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    transition: transform 0.15s, border-color 0.15s;
+    display: flex; flex-direction: column;
+  }
+  .deal:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 56, 96, 0.4);
+  }
+  .deal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .deal-retailer {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+  }
+  .deal-discount {
+    background: var(--accent);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    white-space: nowrap;
+  }
+  .deal-title {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.35;
+    margin-bottom: 12px;
+    flex: 1;
+  }
+  .deal-prices {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .deal-sale {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .deal-orig {
+    font-size: 14px;
+    color: var(--text-dim);
+    text-decoration: line-through;
+  }
+  .deal-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 14px;
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background 0.15s;
+  }
+  .deal-link:hover { background: #22222e; }
+  .deal-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-top: 8px;
+  }
+  .tag-low { background: rgba(255, 56, 96, 0.15); color: #ff6b85; }
+  .tag-lightning { background: rgba(255, 176, 32, 0.15); color: var(--accent-2); }
+  .tag-historic { background: rgba(74, 222, 128, 0.15); color: var(--accent-3); }
+
+  /* Top 3 cards (highlighted) */
+  .top-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  .top-deal {
+    position: relative;
+    background: linear-gradient(135deg, var(--bg-card), rgba(255, 56, 96, 0.05));
+    border: 1px solid rgba(255, 56, 96, 0.3);
+    padding: 24px;
+  }
+  .top-rank {
+    position: absolute;
+    top: -12px; left: 20px;
+    background: var(--gradient);
+    color: #000;
+    font-weight: 800;
+    font-size: 13px;
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+
+  /* Waiting state */
+  .waiting {
+    text-align: center;
+    padding: 48px 24px;
+    background: var(--bg-card);
+    border: 1px dashed var(--border);
+    border-radius: 14px;
+    color: var(--text-dim);
+  }
+  .waiting-icon { font-size: 32px; margin-bottom: 12px; opacity: 0.6; }
+  .waiting strong { color: var(--text); font-weight: 600; display: block; margin-bottom: 4px; }
+
+  /* Categories list */
+  .categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+  }
+  .cat-chip {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .cat-icon { font-size: 18px; }
+
+  /* Footer */
+  .footer {
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 13px;
+  }
+  .footer a { color: var(--accent-2); text-decoration: none; }
+
+  /* Share banner */
+  .share-banner {
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 14px;
+  }
+  .share-banner strong { color: var(--text); }
+
+  @media (max-width: 640px) {
+    .wrap { padding: 20px 16px 60px; }
+    .hero { padding: 28px 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <div class="brand">
+      <div class="brand-icon">🔥</div>
+      <div class="brand-text">
+        <h1>Black Friday Deal Agent</h1>
+        <p>Daily electronics deals · Nov 23 – Nov 30, 2026</p>
+      </div>
+    </div>
+    <div class="live-badge">
+      <span class="pulse"></span>
+      <span id="last-updated">Setting up · First drop Mon 6:36 AM ET</span>
+    </div>
+  </div>
+
+  <div class="share-banner">
+    <span style="font-size: 20px;">📬</span>
+    <div>
+      <strong>Updated automatically every morning at 6:36 AM ET</strong> through Cyber Monday.
+      Bookmark this page or share the link — same URL each day.
+    </div>
+  </div>
+
+  <section class="hero">
+    <span class="hero-eyebrow">🎯 Live Deal Tracker</span>
+    <h2>The best electronics deals,<br>handpicked every morning.</h2>
+    <p>iPhones, laptops, consoles, TVs, headphones and more — searched daily across Amazon, Best Buy, Target, Walmart, Apple and more. Top deals, biggest discounts, and lightning deals before they expire.</p>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">10+</div>
+        <div class="stat-label">Categories</div>
+      </div>
+      <div>
+        <div class="stat-num">8</div>
+        <div class="stat-label">Retailers</div>
+      </div>
+      <div>
+        <div class="stat-num">Daily</div>
+        <div class="stat-label">Refresh</div>
+      </div>
+      <div>
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">Price watch</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEALS_BEGIN -->
+  <section class="section">
+    <div class="section-head">
+      <h3>🏆 Top 3 Deals of the Day</h3>
+      <span>First drop Mon Nov 23</span>
+    </div>
+    <div class="waiting">
+      <div class="waiting-icon">⏱️</div>
+      <strong>First deal drop coming Mon Nov 23 at 6:36 AM ET</strong>
+      Your morning deal report lands here — and every day through Cyber Monday.
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h3>📱 What we'll be tracking</h3>
+      <span>10 categories, refreshed daily</span>
+    </div>
+    <div class="categories">
+      <div class="cat-chip"><span class="cat-icon">📱</span>iPhones</div>
+      <div class="cat-chip"><span class="cat-icon">💻</span>iPads & Macs</div>
+      <div class="cat-chip"><span class="cat-icon">🎧</span>AirPods & Watch</div>
+      <div class="cat-chip"><span class="cat-icon">📲</span>Samsung Galaxy</div>
+      <div class="cat-chip"><span class="cat-icon">💼</span>Windows laptops</div>
+      <div class="cat-chip"><span class="cat-icon">🎮</span>Gaming consoles</div>
+      <div class="cat-chip"><span class="cat-icon">📺</span>TVs (OLED/QLED)</div>
+      <div class="cat-chip"><span class="cat-icon">🎵</span>Headphones</div>
+      <div class="cat-chip"><span class="cat-icon">🏠</span>Smart home</div>
+      <div class="cat-chip"><span class="cat-icon">⌚</span>Wearables & more</div>
+    </div>
+  </section>
+  <!-- DEALS_END -->
+
+  <div class="footer">
+    <p>🤖 Powered by Claude · Automated search every morning at 6:36 AM ET</p>
+    <p style="margin-top: 6px;">All deals verified against major retailers at publish time. Prices and stock may change. Check the retailer before buying.</p>
+  </div>
+
+</div>
+</body>
+</html>
